@@ -18,7 +18,6 @@ build/libs/run.bat
 .gradle/checksums/sha1-checksums.bin
 .gradle/configuration-cache/gc.properties
 .gradle/vcs-1/gc.properties
-.idea/.gitignore
 .idea/compiler.xml
 .settings/org.eclipse.buildship.core.prefs
 .idea/modules/gameriprofibot.iml
@@ -51,7 +50,6 @@ build/libs/gameriprofibot-1.0.jar
 build/libs/warn.json
 bin/main/config.properties
 build/scriptsShadow/gameriprofibot
-.classpath
 build/scripts/gameriprofibot.bat
 build/scripts/gameriprofibot
 build/scriptsShadow/gameriprofibot.bat
