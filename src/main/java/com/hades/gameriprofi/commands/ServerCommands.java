@@ -4,6 +4,7 @@ import com.hades.gameriprofi.config.ConfigRead;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -15,10 +16,11 @@ public class ServerCommands extends ListenerAdapter {
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
         ConfigRead prop = new ConfigRead();
-
+        User author = event.getAuthor();
+        if(author.isBot()){return;}
         if (msg.startsWith("^ip")) {
             try {
-                channel.sendMessage(prop.getStringValue("ip_message");
+                channel.sendMessage(prop.getStringValue("ip_message")).queue();
             } catch (Exception e) {
                 channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
             }
@@ -35,5 +37,8 @@ public class ServerCommands extends ListenerAdapter {
                 channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
             }
         } // TODO: auto gen links
+        
+
+        
     }
 }

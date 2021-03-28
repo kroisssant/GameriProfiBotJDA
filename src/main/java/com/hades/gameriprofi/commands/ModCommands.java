@@ -21,6 +21,8 @@ public class ModCommands extends ListenerAdapter {
         String msg = message.getContentDisplay();
         Guild guild = event.getGuild();
         List<Role> roles = guild.getRoles();
+        User author = event.getAuthor();
+        if(author.isBot()){return;}
         if (msg.startsWith("^kick")) {
             assert member != null;
             if (member.hasPermission(Permission.KICK_MEMBERS)) {

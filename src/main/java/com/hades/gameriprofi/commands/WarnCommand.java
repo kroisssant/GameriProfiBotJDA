@@ -21,6 +21,8 @@ public class WarnCommand extends ListenerAdapter {
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
         String pathWarn = "warn.json";
+        User author = event.getAuthor();
+        if(author.isBot()){return;}
         if (msg.startsWith("^warn")) {
             assert member != null;
             if (member.hasPermission(Permission.MESSAGE_MANAGE)) {

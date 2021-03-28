@@ -2,6 +2,7 @@
 
 package com.hades.gameriprofi;
 
+import com.hades.gameriprofi.commands.ChangePropCommands;
 import com.hades.gameriprofi.commands.ServerCommands;
 import com.hades.gameriprofi.commands.WarnCommand;
 
@@ -28,6 +29,7 @@ public class Bot {
                 .addEventListeners(new Listener())
                 .addEventListeners(new WarnCommand())
                 .addEventListeners(new ServerCommands())
+                .addEventListeners(new ChangePropCommands())
                 .build();
 
         String pathWarn = "warn.json";
