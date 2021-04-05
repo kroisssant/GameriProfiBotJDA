@@ -1,5 +1,5 @@
 //MADE BY HADES
-package com.hades.gameriprofi;
+package com.hades.gameriprofi.events;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
@@ -9,13 +9,9 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import com.hades.gameriprofi.config.ConfigRead;
-
 import org.jetbrains.annotations.NotNull;
 
 public class Listener extends ListenerAdapter {
-
-    ConfigRead prop = new ConfigRead();
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
@@ -26,7 +22,7 @@ public class Listener extends ListenerAdapter {
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         TextChannel channel;
         try {
-            channel = event.getGuild().getTextChannelById(prop.getStringValue("bye_channel"));
+            channel = event.getGuild().getTextChannelById("753316202247356478");
             User member = event.getUser();
             assert channel != null;
             channel.sendMessage("<a:partyparrot:782279542399959070>" + member.getAsTag()
@@ -35,14 +31,14 @@ public class Listener extends ListenerAdapter {
             // TODO Auto-generated catch block
             System.out.println(e);
         }
-        
+
     }
 
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
         TextChannel channel;
         try {
-            channel = event.getGuild().getTextChannelById(prop.getStringValue("welcome_channel"));
+            channel = event.getGuild().getTextChannelById("753316202247356478");
             User member = event.getUser();
             assert channel != null;
             channel.sendMessage("<a:sadblob:819631090444271618> " + member.getAsTag()
@@ -51,7 +47,7 @@ public class Listener extends ListenerAdapter {
             // TODO Auto-generated catch block
             System.out.println(e);
         }
-        
+
     }
 
     @Override
@@ -106,7 +102,9 @@ public class Listener extends ListenerAdapter {
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
             }).start();
-        } // done
+        } 
+        
+        // done
           // Mod COMMANDS FINISH
 
     }

@@ -58,3 +58,15 @@ build/tmp/compileJava/source-classes-mapping.txt
 build/tmp/jar/MANIFEST.MF
 build/tmp/shadowJar/MANIFEST.MF
 src/main/resources/config.properties
+bin/main/com/hades/gameriprofi/core/Bot.class
+bin/main/com/hades/gameriprofi/core/CreateWarnFile.class
+bin/main/com/hades/gameriprofi/events/FWord.class
+bin/main/com/hades/gameriprofi/events/Listener.class
+bin/main/com/hades/gameriprofi/log/Logger.class
+build/classes/java/main/com/hades/gameriprofi/core/Bot.class
+build/classes/java/main/com/hades/gameriprofi/core/CreateWarnFile.class
+build/classes/java/main/com/hades/gameriprofi/events/FWord.class
+build/classes/java/main/com/hades/gameriprofi/events/Listener.class
+build/classes/java/main/com/hades/gameriprofi/log/Logger.class
+build/libs/log.txt
+build/libs/noWordList.json

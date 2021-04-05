@@ -1,7 +1,5 @@
 package com.hades.gameriprofi.commands;
 
-import com.hades.gameriprofi.config.ConfigRead;
-
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -15,12 +13,13 @@ public class ServerCommands extends ListenerAdapter {
         MessageChannel channel = event.getChannel();
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
-        ConfigRead prop = new ConfigRead();
         User author = event.getAuthor();
-        if(author.isBot()){return;}
+        if (author.isBot()) {
+            return;
+        }
         if (msg.startsWith("^ip")) {
             try {
-                channel.sendMessage(prop.getStringValue("ip_message")).queue();
+                channel.sendMessage("<:ipminecraft:825765163566628885> IP-ul serverului de Minecraft: 147.135.181.192:25582").queue();
             } catch (Exception e) {
                 channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
             }
@@ -32,13 +31,11 @@ public class ServerCommands extends ListenerAdapter {
 
         if (msg.startsWith("^link")) {
             try {
-                channel.sendMessage(prop.getStringValue("link")).queue();
+                channel.sendMessage("<:linkulserverului:825765164098781214> Link-ul serverului de discord: https://discord.gg/eSYEt93MnX").queue();
             } catch (Exception e) {
                 channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
             }
         } // TODO: auto gen links
-        
 
-        
     }
 }

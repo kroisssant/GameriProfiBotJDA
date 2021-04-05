@@ -3,7 +3,7 @@ plugins {
     id'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
-mainClassName = 'com.hades.gameriprofi.Bot'
+mainClassName = 'com.hades.gameriprofi.core.Bot'
 
 version '1.0'
 def jdaVersion = '4.2.0_168'
