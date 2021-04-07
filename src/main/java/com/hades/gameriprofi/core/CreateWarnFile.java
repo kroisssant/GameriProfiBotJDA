@@ -1,3 +1,5 @@
+//MADE BY HADES
+
 package com.hades.gameriprofi.core;
 
 import java.io.File;

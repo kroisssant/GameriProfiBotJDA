@@ -70,3 +70,5 @@ build/classes/java/main/com/hades/gameriprofi/events/Listener.class
 build/classes/java/main/com/hades/gameriprofi/log/Logger.class
 build/libs/log.txt
 build/libs/noWordList.json
+bin/main/com/hades/gameriprofi/commands/BadWordsCommands.class
+build/classes/java/main/com/hades/gameriprofi/commands/BadWordsCommands.class

@@ -1,14 +1,13 @@
+//MADE BY HADES
+
 package com.hades.gameriprofi.events;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -25,19 +24,34 @@ public class FWord extends ListenerAdapter {
             String msg = message.getContentDisplay();
             MessageChannel channel = event.getChannel();
             User author = message.getAuthor();
+            boolean isIgnored = false;
+            boolean isBadWord = false;
+            if(author.isBot()){return;}
             try {
                 JSONParser parser = new JSONParser();
                 Reader reader;
                 reader = new FileReader("noWordList.json");
                 JSONObject file = (JSONObject) parser.parse(reader);
                 JSONArray main = (JSONArray) file.get("main");
-                JSONObject word = (JSONObject) main.get(1);
+                JSONObject word = (JSONObject) main.get(0);
                 JSONArray wordArray = (JSONArray) word.get("WordList");
+                JSONObject fChannelsObj = (JSONObject) main.get(1);
+                JSONArray fChannels = (JSONArray) fChannelsObj.get("Ignored Channels");
+                System.out.print(wordArray);
                 for (int i = 0; i < wordArray.size(); i++) {
                     String sWord = (String) wordArray.get(i);
-                    if (msg.contains(sWord)) {
-                        channel.deleteMessageById(message.getId()).queue();
+                    if(msg.contains(sWord)){
+                        isBadWord = true;
                     }
+                }
+                for(int j = 0; j < fChannels.size(); j++) {
+                    String sChannel = (String) fChannels.get(j);
+                    if(sChannel.equals(channel.getId())){
+                        isIgnored = true;
+                    }
+                }
+                if(isBadWord && !isIgnored){
+                    channel.deleteMessageById(message.getId()).queue();
                 }
             } catch (Exception e) {
                 // TODO Auto-generated catch block

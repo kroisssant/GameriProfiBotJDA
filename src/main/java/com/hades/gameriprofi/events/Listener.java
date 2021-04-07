@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class Listener extends ListenerAdapter {
-
     @Override
     public void onReady(@NotNull ReadyEvent event) {
         System.out.println("I am ready");
@@ -52,12 +51,15 @@ public class Listener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+
         MessageChannel channel = event.getChannel();
         User author = event.getAuthor();
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
         String sugestie = msg.toLowerCase();
-
+        if (author.isBot()) {
+            return;
+        }
         if (author.isBot())
             return;
         if (msg.equals("^help")) {
@@ -102,10 +104,10 @@ public class Listener extends ListenerAdapter {
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
             }).start();
-        } 
-        
+        }
+
         // done
-          // Mod COMMANDS FINISH
+        // Mod COMMANDS FINISH
 
     }
 }

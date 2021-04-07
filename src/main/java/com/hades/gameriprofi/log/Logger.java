@@ -1,3 +1,5 @@
+//MADE BY HADES
+
 package com.hades.gameriprofi.log;
 
 import java.io.BufferedOutputStream;

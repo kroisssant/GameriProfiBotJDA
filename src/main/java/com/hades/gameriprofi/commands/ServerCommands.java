@@ -1,3 +1,5 @@
+//MADE BY HADES
+
 package com.hades.gameriprofi.commands;
 
 import net.dv8tion.jda.api.entities.Message;
