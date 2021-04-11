@@ -40,7 +40,7 @@ public class FWord extends ListenerAdapter {
                 System.out.print(wordArray);
                 for (int i = 0; i < wordArray.size(); i++) {
                     String sWord = (String) wordArray.get(i);
-                    if(msg.contains(sWord)){
+                    if(msg.toLowerCase().contains(sWord.toLowerCase())){
                         isBadWord = true;
                     }
                 }

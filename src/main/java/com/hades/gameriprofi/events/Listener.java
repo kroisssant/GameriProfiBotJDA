@@ -40,8 +40,8 @@ public class Listener extends ListenerAdapter {
             channel = event.getGuild().getTextChannelById("753316202247356478");
             User member = event.getUser();
             assert channel != null;
-            channel.sendMessage("<a:sadblob:819631090444271618> " + member.getAsTag()
-                    + " a plecat dupa lapte. <a:sadblob:819631090444271618>").queue();
+            channel.sendMessage("<a:sadblob:819580339110281216> " + member.getAsTag()
+                    + " a plecat dupa lapte. <a:sadblob:819580339110281216>").queue();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             System.out.println(e);

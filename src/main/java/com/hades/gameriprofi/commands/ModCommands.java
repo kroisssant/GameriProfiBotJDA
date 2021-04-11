@@ -90,13 +90,12 @@ public class ModCommands extends ListenerAdapter {
                     try {
                         int i_final_authur = 0;
                         int i_final_ban_member = 0;
-                        String reason = msg.replace("^ban " + message.getMentionedMembers().get(0), "");
                         if (message.getMentionedMembers().size() > 1) {
                             channel.sendMessage("You can ban only one member at the time!").queue();
                             return;
                         }
                         if (message.getMentionedMembers().get(0).getRoles().size() == 0) {
-                            message.getMentionedMembers().get(0).kick(reason).queue();
+                            message.getMentionedMembers().get(0).ban(1).reason("Ban by " + author.getAsTag()).queue();
                             channel.sendMessage("<:ban:825765163994054676> " + message.getMentionedUsers().get(0).getAsTag() + " a fost banat.")
                                     .queue();
                         } else {
@@ -115,7 +114,7 @@ public class ModCommands extends ListenerAdapter {
                                 }
                             }
                             if (i_final_authur < i_final_ban_member) {
-                                message.getMentionedMembers().get(0).kick(reason).queue();
+                                message.getMentionedMembers().get(0).ban(1).reason("Ban by " + author.getAsTag()).queue();
                                 channel.sendMessage("<:ban:825765163994054676> " + message.getMentionedUsers().get(0).getAsTag() + " a fost banat.")
                                         .queue();
                                 Logger.log(logPath, author.getAsTag() + " banned "

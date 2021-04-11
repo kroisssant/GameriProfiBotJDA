@@ -43,8 +43,6 @@ public class Bot {
                 .setActivity(Activity.playing("^help for help")).addEventListeners(new Listener()).addEventListeners(new FWord()).addEventListeners(new BadWordsCommands())
                 .addEventListeners(new WarnCommand()).addEventListeners(new ServerCommands()).addEventListeners(new ModCommands()).build();
 
-        CreateWarnFile.createWarnFile();
-        CreateWarnFile.createWordList();
-        CreateWarnFile.createLogFile();
+        CreateWarnFile.createFiles();
     }
 }

@@ -20,7 +20,13 @@ public class CreateWarnFile {
     static File tryFile = new File(pathWarn);
     static File fWordList = new File(pathWordList);
 
-    public static void createWarnFile() {
+    public static void createFiles() {
+        createWarnFile();
+        createLogFile();
+        createWordList();
+    }
+
+    private static void createWarnFile() {
         try {
             if (tryFile.createNewFile()) {
                 System.out.println("File created: " + tryFile.getName());
@@ -42,7 +48,7 @@ public class CreateWarnFile {
         }
     }
 
-    public static void createLogFile() {
+    private static void createLogFile() {
         try {
             if(logFile.createNewFile()){
                 System.out.println("File created: " + logFile.getName());
@@ -52,7 +58,7 @@ public class CreateWarnFile {
             e.printStackTrace();
         }
     }
-    public static void createWordList() {
+    private static void createWordList() {
         try {
             if(fWordList.createNewFile()){
                 

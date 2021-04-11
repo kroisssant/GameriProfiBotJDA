@@ -10,6 +10,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -24,10 +26,11 @@ public class BadWordsCommands extends ListenerAdapter {
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
         String[] lMsg = msg.split(" ");
+        Member auth = message.getMember();
         if (author.isBot()) {
             return;
         }
-        if (msg.startsWith("^list")) {
+        if (msg.startsWith("^list") && auth.hasPermission(Permission.MANAGE_SERVER)) {
 
             try {
                 Reader reader = new FileReader("noWordList.json");
@@ -64,6 +67,10 @@ public class BadWordsCommands extends ListenerAdapter {
                 case "remove":
                     wordList.remove(lMsg[2]);
                     channel.sendMessage("<:list_remove:825769483666194433> " + lMsg[2] + " a fost scos din lista cuvintelor interzise." ).queue();
+                    break;
+                case "unignore":
+                    ignoreChannel.remove(message.getMentionedChannels().get(0).getId());
+                    channel.sendMessage(message.getMentionedChannels().get(0).getId() + " a fost scos din lista canalelor ignorate.").queue();
                     break;
                 }
                 try (FileWriter writer = new FileWriter("noWordList.json")) {
