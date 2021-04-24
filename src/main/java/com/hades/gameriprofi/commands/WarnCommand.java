@@ -25,6 +25,7 @@ public class WarnCommand extends ListenerAdapter {
         String pathWarn = "warn.json";
         String logPath = "log.txt";
         User author = event.getAuthor();
+        String[] args = msg.split(" ");
         if (author.isBot()) {
             return;
         }
@@ -33,15 +34,19 @@ public class WarnCommand extends ListenerAdapter {
             if (member.hasPermission(Permission.MESSAGE_MANAGE)) {
                 if (message.getMentionedMembers().size() > 1) {
                     channel.sendMessage("You can warn only one person at a time!").queue();
+                    return;
                 }
                 new Thread(() -> {
                     boolean inJSON = false;
-                    System.out.println("thread start ^warn");
                     try {
                         JSONParser parser = new JSONParser();
                         Reader reader = new FileReader(pathWarn);
                         JSONObject file = (JSONObject) parser.parse(reader);
                         JSONArray warn = (JSONArray) file.get("warn");
+                        if (author.getId().equals(message.getMentionedUsers().get(0).getId())) {
+                            channel.sendMessage("You can't warn yourself.").queue();
+                            return;
+                        }
                         for (Object o : warn) {
                             JSONObject warnObj = (JSONObject) o;
                             if (warnObj.get(message.getMentionedMembers().get(0).getId()) != null) {
@@ -59,16 +64,16 @@ public class WarnCommand extends ListenerAdapter {
                         }
                         try (FileWriter writer = new FileWriter(pathWarn)) {
                             writer.write(file.toJSONString());
-                            channel.sendMessage("<:warn:825765163822481449> " + message.getMentionedUsers().get(0).getAsTag() + " a primit un warn.")
-                                    .queue();
+                            channel.sendMessage("<:warn:825765163822481449> "
+                                    + message.getMentionedUsers().get(0).getAsTag() + " a primit un warn.").queue();
                             Logger.log(logPath, author.getAsTag() + " warned "
                                     + message.getMentionedUsers().get(0).getAsTag() + " for " + msg);
                         } catch (IOException e) {
-                            System.out.println(e);
+                            e.printStackTrace();
                             channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
                         }
                     } catch (Exception e) {
-                        System.out.println(e);
+                        e.printStackTrace();
                         channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
                     }
                 }).start();
@@ -81,11 +86,15 @@ public class WarnCommand extends ListenerAdapter {
             if (member.hasPermission(Permission.MESSAGE_MANAGE)) {
                 if (message.getMentionedMembers().size() > 1) {
                     channel.sendMessage("You can warn only one person at a time!").queue();
+                    return;
                 }
                 new Thread(() -> {
                     boolean inJSON = false;
-                    System.out.println("thread start ^delwarn");
                     try {
+                        if (author.getId().equals(message.getMentionedUsers().get(0).getId())) {
+                            channel.sendMessage("You can't delete your warns.").queue();
+                            return;
+                        }
                         JSONParser parser = new JSONParser();
                         Reader reader = new FileReader(pathWarn);
                         JSONObject file = (JSONObject) parser.parse(reader);
@@ -99,20 +108,19 @@ public class WarnCommand extends ListenerAdapter {
                             }
                         }
                         if (!inJSON) {
-                            channel.sendMessage("<:delwarn:825765163957354517>" + message.getMentionedUsers().get(0).getAsTag() + " nu are warnuri")
-                                    .queue();
+                            channel.sendMessage("<:delwarn:825765163957354517>"
+                                    + message.getMentionedUsers().get(0).getAsTag() + " nu are warnuri").queue();
                         }
                         try (FileWriter writer = new FileWriter(pathWarn)) {
                             writer.write(file.toJSONString());
-                            channel.sendMessage("<:delwarn:825765163957354517> I-am scos warn-uri lui " +
-                                    message.getMentionedUsers().get(0).getAsTag())
-                                    .queue();
+                            channel.sendMessage("<:delwarn:825765163957354517> I-am scos warn-uri lui "
+                                    + message.getMentionedUsers().get(0).getAsTag()).queue();
                         } catch (IOException e) {
-                            System.out.println(e);
+                            e.printStackTrace();
                             channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
                         }
                     } catch (Exception e) {
-                        System.out.println(e);
+                        e.printStackTrace();
                         channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
                     }
                 }).start();
@@ -121,46 +129,51 @@ public class WarnCommand extends ListenerAdapter {
             }
         } // TODO: Error handling
         if (msg.startsWith("^cwarns")) {
-            assert member != null;
-            if (member.hasPermission(Permission.MESSAGE_MANAGE)) {
-                if (message.getMentionedMembers().size() > 1) {
-                    channel.sendMessage("You can delete warns for only one person at a time!").queue();
-                }
-                new Thread(() -> {
-                    boolean inJSON = false;
-                    try {
-                        JSONParser parser = new JSONParser();
-                        Reader reader = new FileReader(pathWarn);
-                        JSONObject file = (JSONObject) parser.parse(reader);
-                        JSONArray warn = (JSONArray) file.get("warn");
-                        for (Object o : warn) {
-                            JSONObject warnObj = (JSONObject) o;
-                            if (warnObj.get(message.getMentionedMembers().get(0).getId()) != null) {
-                                JSONArray warns = (JSONArray) warnObj.get(message.getMentionedMembers().get(0).getId());
-                                if (warns.size() > 1) {
-                                    channel.sendMessage("<:cwarns:825765163940577330> " +message.getMentionedUsers().get(0).getAsTag() + " are "
-                                            + warns.size() + " warn-uri").queue();
-                                } else if (warns.size() == 1) {
-                                    channel.sendMessage(
-                                            "<:cwarns:825765163940577330> " + message.getMentionedUsers().get(0).getAsTag() + " are un warn.").queue();
-                                } else {
-                                    channel.sendMessage(
-                                        "<:cwarns:825765163940577330> " + message.getMentionedUsers().get(0).getAsTag() + " nu are niciun warn.")
-                                            .queue();
-                                }
-                                inJSON = true;
-                            }
-                        }
-                        if (!inJSON) {
-                            channel.sendMessage(
-                                "<:cwarns:825765163940577330> " + message.getMentionedUsers().get(0).getAsTag() + " nu are niciun warn.").queue();
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e);
-                        channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
+            new Thread(() -> {
+                String id = author.getId();
+                String tag = author.getAsTag();
+                boolean inJSON = false;
+                try {
+                    if (message.getMentionedMembers().size() < 1) {
+                        id = author.getId();
+                        tag = author.getAsTag();
+                    } else if (message.getMentionedMembers().size() == 1) {
+                        id = message.getMentionedMembers().get(0).getId();
+                        tag = message.getMentionedUsers().get(0).getAsTag();
+                    } else if (message.getMentionedMembers().size() > 1) {
+                        channel.sendMessage("You can see the number o warns for only one person at a time").queue();
+                        return;
                     }
-                }).start();
-            }
+                    JSONParser parser = new JSONParser();
+                    Reader reader = new FileReader(pathWarn);
+                    JSONObject file = (JSONObject) parser.parse(reader);
+                    JSONArray warn = (JSONArray) file.get("warn");
+                    for (Object o : warn) {
+                        JSONObject warnObj = (JSONObject) o;
+                        if (warnObj.get(id) != null) {
+                            JSONArray warns = (JSONArray) warnObj.get(id);
+                            if (warns.size() > 1) {
+                                channel.sendMessage(
+                                        "<:cwarns:825765163940577330> " + tag + " are " + warns.size() + " warn-uri")
+                                        .queue();
+                            } else if (warns.size() == 1) {
+                                channel.sendMessage("<:cwarns:825765163940577330> " + tag + " are un warn.").queue();
+                            } else {
+                                channel.sendMessage("<:cwarns:825765163940577330> " + tag + " nu are niciun warn.")
+                                        .queue();
+                            }
+                            inJSON = true;
+                        }
+                    }
+                    if (!inJSON) {
+                        channel.sendMessage("<:cwarns:825765163940577330> "
+                                + tag + " nu are niciun warn.").queue();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
+                }
+            }).start();
         }
     }
 }

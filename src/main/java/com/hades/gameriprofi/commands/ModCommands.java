@@ -47,19 +47,15 @@ public class ModCommands extends ListenerAdapter {
                         } else {
                             for (int i = 0; i < roles.size(); i++) {
                                 Role role_1 = message.getMentionedMembers().get(0).getRoles().get(0);
-                                System.out.println("role_kicked " + role_1);
                                 if (role_1 == roles.get(i)) {
                                     i_final_kick_member = i;
-                                    System.out.println("i_final_kick_member " + i_final_kick_member);
                                     break;
                                 }
                             }
                             for (int i = 0; i < roles.size(); i++) {
                                 Role role_2 = member.getRoles().get(0);
-                                System.out.println("authour_kicked " + role_2);
                                 if (role_2 == roles.get(i)) {
                                     i_final_authur = i;
-                                    System.out.println("i_final_authur " + i_final_authur);
                                     break;
                                 }
                             }
@@ -76,7 +72,7 @@ public class ModCommands extends ListenerAdapter {
                         }
 
                     } catch (Exception e) {
-                        System.out.println(e);
+                        e.printStackTrace();
                     }
                 }).start();
             } else {
@@ -125,7 +121,7 @@ public class ModCommands extends ListenerAdapter {
                         }
 
                     } catch (Exception e) {
-                        System.out.println(e);
+                        e.printStackTrace();
                     }
                 }).start();
             } else {

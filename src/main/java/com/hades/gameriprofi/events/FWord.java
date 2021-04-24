@@ -19,7 +19,6 @@ public class FWord extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         new Thread(() -> {
-            System.out.println("Fword thread start");
             Message message = event.getMessage();
             String msg = message.getContentDisplay();
             MessageChannel channel = event.getChannel();
@@ -37,7 +36,6 @@ public class FWord extends ListenerAdapter {
                 JSONArray wordArray = (JSONArray) word.get("WordList");
                 JSONObject fChannelsObj = (JSONObject) main.get(1);
                 JSONArray fChannels = (JSONArray) fChannelsObj.get("Ignored Channels");
-                System.out.print(wordArray);
                 for (int i = 0; i < wordArray.size(); i++) {
                     String sWord = (String) wordArray.get(i);
                     if(msg.toLowerCase().contains(sWord.toLowerCase())){

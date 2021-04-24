@@ -33,7 +33,7 @@ public class CreateWarnFile {
                 createWarnFile = true;
             }
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         if (createWarnFile) {
             JSONObject obj = new JSONObject();

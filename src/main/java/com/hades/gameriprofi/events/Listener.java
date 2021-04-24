@@ -28,7 +28,7 @@ public class Listener extends ListenerAdapter {
                     + "prezent la datorie. <a:partyparrot:782279542399959070>").queue();
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }
@@ -44,7 +44,7 @@ public class Listener extends ListenerAdapter {
                     + " a plecat dupa lapte. <a:sadblob:819580339110281216>").queue();
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }
