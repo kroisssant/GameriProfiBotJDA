@@ -13,7 +13,7 @@ public class CreateWarnFile {
     static String pathWarn = "warn.json";
     static String pathWordList = "noWordList.json";
     static String pathLog = "log.txt";
-    
+
     static boolean createWarnFile = false;
 
     static File logFile = new File(pathLog);
@@ -50,18 +50,18 @@ public class CreateWarnFile {
 
     private static void createLogFile() {
         try {
-            if(logFile.createNewFile()){
+            if (logFile.createNewFile()) {
                 System.out.println("File created: " + logFile.getName());
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+
     private static void createWordList() {
         try {
-            if(fWordList.createNewFile()){
-                
+            if (fWordList.createNewFile()) {
+
                 JSONObject obj = new JSONObject();
                 JSONArray main = new JSONArray();
                 obj.put("main", main);
@@ -82,7 +82,6 @@ public class CreateWarnFile {
 
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

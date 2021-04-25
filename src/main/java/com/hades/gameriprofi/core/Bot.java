@@ -34,7 +34,6 @@ public class Bot {
         System.out.println(".mdo:       :/dN-`+omd``       ``oNhs-`ymmmhhhhhhyo:-     `.yNmdhhhhhhhh:-   `:+hhhhhhhddo+-.  ");
         System.out.println(".--.`       ``--` ..-.           .--.` .---------.`         .-----------``     `---------``    ");
         System.out.println("\n");
-
         Scanner scanner = new Scanner(new File("token.txt"), "UTF-8");
         String token = scanner.nextLine();
         JDABuilder
@@ -42,7 +41,8 @@ public class Bot {
                         GatewayIntent.DIRECT_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
                 .setActivity(Activity.playing("^help for help")).addEventListeners(new Listener()).addEventListeners(new FWord()).addEventListeners(new BadWordsCommands())
                 .addEventListeners(new WarnCommand()).addEventListeners(new ServerCommands()).addEventListeners(new ModCommands()).build();
-
+        
         CreateWarnFile.createFiles();
+        
     }
 }

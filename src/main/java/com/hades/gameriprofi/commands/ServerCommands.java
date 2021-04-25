@@ -21,7 +21,9 @@ public class ServerCommands extends ListenerAdapter {
         }
         if (msg.startsWith("^ip")) {
             try {
-                channel.sendMessage("<:ipminecraft:825765163566628885> IP-ul serverului de Minecraft: 147.135.181.192:25582").queue();
+                channel.sendMessage(
+                        "<:ipminecraft:825765163566628885> IP-ul serverului de Minecraft: 147.135.181.192:25582")
+                        .queue();
             } catch (Exception e) {
                 channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
             }
@@ -33,7 +35,9 @@ public class ServerCommands extends ListenerAdapter {
 
         if (msg.startsWith("^link")) {
             try {
-                channel.sendMessage("<:linkulserverului:825765164098781214> Link-ul serverului de discord: https://discord.gg/A5m4wN6zbg").queue();
+                channel.sendMessage(
+                        "<:linkulserverului:825765164098781214> Link-ul serverului de discord: https://discord.gg/A5m4wN6zbg")
+                        .queue();
             } catch (Exception e) {
                 channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
             }

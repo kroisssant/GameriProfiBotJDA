@@ -25,7 +25,9 @@ public class FWord extends ListenerAdapter {
             User author = message.getAuthor();
             boolean isIgnored = false;
             boolean isBadWord = false;
-            if(author.isBot()){return;}
+            if (author.isBot()) {
+                return;
+            }
             try {
                 JSONParser parser = new JSONParser();
                 Reader reader;
@@ -38,25 +40,23 @@ public class FWord extends ListenerAdapter {
                 JSONArray fChannels = (JSONArray) fChannelsObj.get("Ignored Channels");
                 for (int i = 0; i < wordArray.size(); i++) {
                     String sWord = (String) wordArray.get(i);
-                    if(msg.toLowerCase().contains(sWord.toLowerCase())){
+                    if (msg.toLowerCase().contains(sWord.toLowerCase())) {
                         isBadWord = true;
                     }
                 }
-                for(int j = 0; j < fChannels.size(); j++) {
+                for (int j = 0; j < fChannels.size(); j++) {
                     String sChannel = (String) fChannels.get(j);
-                    if(sChannel.equals(channel.getId())){
+                    if (sChannel.equals(channel.getId())) {
                         isIgnored = true;
                     }
                 }
-                if(isBadWord && !isIgnored){
+                if (isBadWord && !isIgnored) {
                     channel.deleteMessageById(message.getId()).queue();
                 }
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }).start();
 
     }
 }
-// TODO solve the java.lang.NullPointerException

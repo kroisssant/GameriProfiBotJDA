@@ -13,8 +13,6 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 
-import com.hades.gameriprofi.log.Logger;
-
 public class WarnCommand extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
@@ -23,9 +21,7 @@ public class WarnCommand extends ListenerAdapter {
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
         String pathWarn = "warn.json";
-        String logPath = "log.txt";
         User author = event.getAuthor();
-        String[] args = msg.split(" ");
         if (author.isBot()) {
             return;
         }
@@ -66,8 +62,6 @@ public class WarnCommand extends ListenerAdapter {
                             writer.write(file.toJSONString());
                             channel.sendMessage("<:warn:825765163822481449> "
                                     + message.getMentionedUsers().get(0).getAsTag() + " a primit un warn.").queue();
-                            Logger.log(logPath, author.getAsTag() + " warned "
-                                    + message.getMentionedUsers().get(0).getAsTag() + " for " + msg);
                         } catch (IOException e) {
                             e.printStackTrace();
                             channel.sendMessage("There was a problem, contact <@498813372788113408> for help").queue();
@@ -166,8 +160,7 @@ public class WarnCommand extends ListenerAdapter {
                         }
                     }
                     if (!inJSON) {
-                        channel.sendMessage("<:cwarns:825765163940577330> "
-                                + tag + " nu are niciun warn.").queue();
+                        channel.sendMessage("<:cwarns:825765163940577330> " + tag + " nu are niciun warn.").queue();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -24,10 +24,9 @@ public class Listener extends ListenerAdapter {
             channel = event.getGuild().getTextChannelById("753316202247356478");
             User member = event.getUser();
             assert channel != null;
-            channel.sendMessage("<a:partyparrot:782279542399959070>" + member.getAsTag()
-                    + "prezent la datorie. <a:partyparrot:782279542399959070>").queue();
+            channel.sendMessage("<a:partyparrot:782279542399959070> " + member.getAsTag() + "prezent la datorie. ")
+                    .queue();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -40,10 +39,9 @@ public class Listener extends ListenerAdapter {
             channel = event.getGuild().getTextChannelById("753316202247356478");
             User member = event.getUser();
             assert channel != null;
-            channel.sendMessage("<a:sadblob:819580339110281216> " + member.getAsTag()
-                    + " a plecat dupa lapte. <a:sadblob:819580339110281216>").queue();
+            channel.sendMessage("<:clear_effect:753328273081106575> " + member.getAsTag() + " a plecat dupa lapte.")
+                    .queue();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -56,7 +54,7 @@ public class Listener extends ListenerAdapter {
         User author = event.getAuthor();
         Message message = event.getMessage();
         String msg = message.getContentDisplay();
-        String sugestie = msg.toLowerCase();
+        String sugestie = msg.  
         if (author.isBot()) {
             return;
         }
@@ -74,7 +72,7 @@ public class Listener extends ListenerAdapter {
                 helpEmbed.addField("ip", "Minecraft server ip", false);
                 channel.sendMessage(helpEmbed.build()).queue();
             }).start();
-        } // done
+        }
         if (msg.equals("^mod")) {
             new Thread(() -> {
                 EmbedBuilder modHelpEmbed = new EmbedBuilder();
@@ -92,22 +90,16 @@ public class Listener extends ListenerAdapter {
                 modHelpEmbed.addField("unlock", "Unlock a channel", false);
                 channel.sendMessage(modHelpEmbed.build()).queue();
             }).start();
-        } // done
+        } 
 
-        // SERVER COMMANDS START
-
-        // SERVER COMMANDS FINISH
-
-        // Mod COMMANDS START
         if (sugestie.contains("sugestie")) {
             new Thread(() -> {
                 message.addReaction("✅").queue();
                 message.addReaction("❌").queue();
             }).start();
         }
-
-        // done
-        // Mod COMMANDS FINISH
-
+        if (msg.equals("wlc")){
+            channel.sendMessage(author.getAsMention() + " iti ureaza bun venit!").queue();
+        }
     }
 }

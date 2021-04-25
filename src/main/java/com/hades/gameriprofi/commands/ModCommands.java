@@ -10,8 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import com.hades.gameriprofi.log.Logger;
-
 public class ModCommands extends ListenerAdapter {
 
     @Override
@@ -23,7 +21,6 @@ public class ModCommands extends ListenerAdapter {
         Guild guild = event.getGuild();
         List<Role> roles = guild.getRoles();
         User author = event.getAuthor();
-        String logPath = "log.txt";
         if (author.isBot()) {
             return;
         }
@@ -41,9 +38,8 @@ public class ModCommands extends ListenerAdapter {
                         }
                         if (message.getMentionedMembers().get(0).getRoles().size() == 0) {
                             message.getMentionedMembers().get(0).kick(reason).queue();
-                            channel.sendMessage(
-                                    "<:kick:825765163655102465> " + message.getMentionedUsers().get(0).getAsTag() + " a fost dat afara.")
-                                    .queue();
+                            channel.sendMessage("<:kick:825765163655102465> "
+                                    + message.getMentionedUsers().get(0).getAsTag() + " a fost dat afara.").queue();
                         } else {
                             for (int i = 0; i < roles.size(); i++) {
                                 Role role_1 = message.getMentionedMembers().get(0).getRoles().get(0);
@@ -61,11 +57,9 @@ public class ModCommands extends ListenerAdapter {
                             }
                             if (i_final_authur < i_final_kick_member) {
                                 message.getMentionedMembers().get(0).kick(reason).queue();
-                                channel.sendMessage(
-                                        "<:kick:825765163655102465> " + message.getMentionedUsers().get(0).getAsTag() + " a fost dat afara.")
-                                        .queue();
-                                Logger.log(logPath, author.getAsTag() + " kicked "
-                                        + message.getMentionedUsers().get(0).getAsTag() + " for " + msg);
+                                channel.sendMessage("<:kick:825765163655102465> "
+                                        + message.getMentionedUsers().get(0).getAsTag() + " a fost dat afara.").queue();
+
                             } else {
                                 channel.sendMessage("You can't kick a person with a higher rank.").queue();
                             }
@@ -92,8 +86,8 @@ public class ModCommands extends ListenerAdapter {
                         }
                         if (message.getMentionedMembers().get(0).getRoles().size() == 0) {
                             message.getMentionedMembers().get(0).ban(1).reason("Ban by " + author.getAsTag()).queue();
-                            channel.sendMessage("<:ban:825765163994054676> " + message.getMentionedUsers().get(0).getAsTag() + " a fost banat.")
-                                    .queue();
+                            channel.sendMessage("<:ban:825765163994054676> "
+                                    + message.getMentionedUsers().get(0).getAsTag() + " a fost banat.").queue();
                         } else {
                             for (int i = 0; i < roles.size(); i++) {
                                 Role role_1 = message.getMentionedMembers().get(0).getRoles().get(0);
@@ -110,11 +104,11 @@ public class ModCommands extends ListenerAdapter {
                                 }
                             }
                             if (i_final_authur < i_final_ban_member) {
-                                message.getMentionedMembers().get(0).ban(1).reason("Ban by " + author.getAsTag()).queue();
-                                channel.sendMessage("<:ban:825765163994054676> " + message.getMentionedUsers().get(0).getAsTag() + " a fost banat.")
+                                message.getMentionedMembers().get(0).ban(1).reason("Ban by " + author.getAsTag())
                                         .queue();
-                                Logger.log(logPath, author.getAsTag() + " banned "
-                                        + message.getMentionedUsers().get(0).getAsTag() + " for " + msg);
+                                channel.sendMessage("<:ban:825765163994054676> "
+                                        + message.getMentionedUsers().get(0).getAsTag() + " a fost banat.").queue();
+
                             } else {
                                 channel.sendMessage("You can't ban a person with a higher rank.").queue();
                             }
@@ -135,9 +129,7 @@ public class ModCommands extends ListenerAdapter {
                 String ban_person_id = args[1];
                 guild.unban(ban_person_id).queue();
                 channel.sendMessage("<:unban:825765163990908998> Persoana nu mai are ban.").queue();
-                Logger.log(logPath,
-                        author.getAsTag() + " unbanned " + message.getMentionedUsers().get(0).getAsTag());
-            
+
             } else {
 
                 channel.sendMessage("You don't permission to do that").queue();
@@ -153,10 +145,7 @@ public class ModCommands extends ListenerAdapter {
                     event.getTextChannel().purgeMessages(messages);
                 }).start();
                 channel.sendMessage("<:del_message:826476428412321812> " + purge + " mesaje au fost sterse.").queue();
-                
-                Logger.log(logPath,
-                        author.getAsTag() + " deleted " + purge + " messages form channel " + channel.getId());
-                
+
             } else {
                 channel.sendMessage("You don't permission to do that").queue();
             }
@@ -166,10 +155,9 @@ public class ModCommands extends ListenerAdapter {
             if (member.hasPermission(Permission.MANAGE_CHANNEL)) {
                 event.getTextChannel().putPermissionOverride(event.getTextChannel().getGuild().getPublicRole())
                         .setDeny(Permission.MESSAGE_WRITE).queue();
-                channel.sendMessage("<:lock_server:825765163944247296> "+channel.getName() + " a fost blocat.").queue();
-                
-                Logger.log(logPath, author.getAsTag() + " has put " + channel + " on lockdown");
-                
+                channel.sendMessage("<:lock_server:825765163944247296> " + channel.getName() + " a fost blocat.")
+                        .queue();
+
             } else {
                 channel.sendMessage("You don't permission to do that").queue();
             }
@@ -179,8 +167,9 @@ public class ModCommands extends ListenerAdapter {
             if (member.hasPermission(Permission.MANAGE_CHANNEL)) {
                 event.getTextChannel().putPermissionOverride(event.getTextChannel().getGuild().getPublicRole())
                         .setAllow(Permission.MESSAGE_WRITE).queue();
-                channel.sendMessage("<:unlock_server:825765163734007810> " + channel.getName() + " a fost deblocat.").queue();
-                    Logger.log(logPath, author.getAsTag() + " unlocked " + channel.getId());
+                channel.sendMessage("<:unlock_server:825765163734007810> " + channel.getName() + " a fost deblocat.")
+                        .queue();
+
             } else {
                 channel.sendMessage("You don't permission to do that").queue();
             }
