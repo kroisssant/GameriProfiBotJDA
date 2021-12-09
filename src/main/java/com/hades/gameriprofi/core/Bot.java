@@ -1,4 +1,7 @@
-//MADE BY HADES
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
 
 package com.hades.gameriprofi.core;
 
@@ -8,20 +11,21 @@ import com.hades.gameriprofi.commands.ServerCommands;
 import com.hades.gameriprofi.commands.WarnCommand;
 import com.hades.gameriprofi.events.FWord;
 import com.hades.gameriprofi.events.Listener;
-
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
-import javax.security.auth.login.LoginException;
-import java.io.*;
-import java.util.Scanner;
-
 public class Bot {
+    public Bot() {
+    }
 
     public static void main(String[] args) throws LoginException, IOException {
         System.out.println("\n");
-        System.out.println(".Mm:-.`     `.::`      `./::-``       -:://////::-        `-::////////:.`      `.:://///..     "); 
+        System.out.println(".Mm:-.`     `.::`      `./::-``       -:://////::-        `-::////////:.`      `.:://///..     ");
         System.out.println(".mdo:       :/dN-`     `/oNmmy/.      `ymmdyyyyyydy/:``   `.yNddyyyyyyyy--    `-+sdhyyyyy++.`  ");
         System.out.println(".mdo:       :/dN-`     .hyssssy/      `ymso`    `+omh+:   `.yNo/`            .+yNy/.     -:..  ");
         System.out.println(".mdo:       :/dN-`    .:Nh-::omo.`    `ymso`      .syms.` `.yNo/`            -hdmo`            ");
@@ -34,15 +38,9 @@ public class Bot {
         System.out.println(".mdo:       :/dN-`+omd``       ``oNhs-`ymmmhhhhhhyo:-     `.yNmdhhhhhhhh:-   `:+hhhhhhhddo+-.  ");
         System.out.println(".--.`       ``--` ..-.           .--.` .---------.`         .-----------``     `---------``    ");
         System.out.println("\n");
-
         Scanner scanner = new Scanner(new File("token.txt"), "UTF-8");
         String token = scanner.nextLine();
-        JDABuilder
-                .create(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_BANS,
-                        GatewayIntent.DIRECT_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS)
-                .setActivity(Activity.playing("^help for help")).addEventListeners(new Listener()).addEventListeners(new FWord()).addEventListeners(new BadWordsCommands())
-                .addEventListeners(new WarnCommand()).addEventListeners(new ServerCommands()).addEventListeners(new ModCommands()).build();
-
+        JDABuilder.create(token, GatewayIntent.GUILD_MESSAGES, new GatewayIntent[]{GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_BANS, GatewayIntent.DIRECT_MESSAGE_REACTIONS, GatewayIntent.GUILD_EMOJIS}).setActivity(Activity.playing("^help for help")).addEventListeners(new Object[]{new Listener()}).addEventListeners(new Object[]{new FWord()}).addEventListeners(new Object[]{new BadWordsCommands()}).addEventListeners(new Object[]{new WarnCommand()}).addEventListeners(new Object[]{new ServerCommands()}).addEventListeners(new Object[]{new ModCommands()}).build();
         CreateWarnFile.createFiles();
     }
 }
