@@ -19,7 +19,6 @@ public class FWord extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         new Thread(() -> {
-            System.out.println("Fword thread start");
             Message message = event.getMessage();
             String msg = message.getContentDisplay();
             MessageChannel channel = event.getChannel();
